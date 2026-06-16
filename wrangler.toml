@@ -1,0 +1,10 @@
+name = "obin-portfolio"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "dist"
+
+# Deploy with:  npm run build && npx wrangler pages deploy dist
+# The Letterboxd/Goodreads feed proxy lives in functions/api/feeds.ts and is
+# picked up automatically by Cloudflare Pages Functions.
+#
+# Optional: set the Goodreads RSS URL so the books section goes live:
+#   npx wrangler pages secret put GOODREADS_RSS

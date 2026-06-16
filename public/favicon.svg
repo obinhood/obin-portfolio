@@ -1,0 +1,6 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="16" fill="#0A0A0B"/>
+  <path d="M8 44 C20 30, 26 42, 34 28 S50 16, 56 22" stroke="#2B5BFF" stroke-width="2.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <path d="M8 52 C22 40, 30 50, 40 36 S54 28, 56 32" stroke="#FF3D81" stroke-width="2.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <text x="32" y="40" font-family="'Clash Display', system-ui, sans-serif" font-size="26" font-weight="700" fill="#F5A623" text-anchor="middle">ON</text>
+</svg>

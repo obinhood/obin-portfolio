@@ -1,0 +1,31 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2B5BFF"/>
+      <stop offset="0.5" stop-color="#FF3D81"/>
+      <stop offset="1" stop-color="#F5A623"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.8" cy="0.2" r="0.8">
+      <stop offset="0" stop-color="#2B5BFF" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#0A0A0B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0A0A0B"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- contour lines -->
+  <g stroke="#ffffff" stroke-opacity="0.06" fill="none" stroke-width="1.5">
+    <path d="M0 120 C200 90, 380 180, 600 130 S1000 80, 1200 150"/>
+    <path d="M0 220 C220 180, 420 280, 640 230 S1020 180, 1200 250"/>
+    <path d="M0 420 C200 380, 420 480, 640 430 S1020 380, 1200 450"/>
+    <path d="M0 520 C220 480, 420 580, 640 530 S1020 480, 1200 560"/>
+  </g>
+  <g font-family="'Clash Display', system-ui, sans-serif">
+    <text x="80" y="300" font-size="120" font-weight="700" fill="#F5F5F7" letter-spacing="-4">OBIN</text>
+    <text x="80" y="420" font-size="120" font-weight="700" fill="url(#g)" letter-spacing="-4">NGUYEN</text>
+  </g>
+  <text x="84" y="500" font-family="'Geist', system-ui, sans-serif" font-size="30" fill="#9C9EAA">Senior strategic consultant in cities, mobility &amp; AI.</text>
+  <g font-family="'Geist Mono', monospace" font-size="22" fill="#F5A623">
+    <circle cx="92" cy="556" r="6" fill="#F5A623"/>
+    <text x="112" y="563">obinle.com</text>
+  </g>
+</svg>

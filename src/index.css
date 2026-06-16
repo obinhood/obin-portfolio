@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   DESIGN TOKENS — "Electric Cartography"
+   Ink-black base, electric cobalt / magenta / gold accents.
+   Colours are RGB triples so Tailwind can apply <alpha-value>.
+   Theme swaps by toggling [data-theme] on <html>.
+   ============================================================ */
+:root,
+[data-theme="dark"] {
+  --bg: 10 10 11; /* #0A0A0B */
+  --bg-soft: 17 17 20;
+  --surface: 23 23 28;
+  --line: 255 255 255;
+  --text: 245 245 247;
+  --text-muted: 156 158 170;
+
+  --cobalt: 43 91 255; /* #2B5BFF */
+  --magenta: 255 61 129; /* #FF3D81 */
+  --gold: 245 166 35; /* #F5A623 amber-gold */
+
+  --line-alpha: 0.08;
+  --grain-opacity: 0.1;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: 250 249 245; /* warm paper */
+  --bg-soft: 240 238 232;
+  --surface: 255 255 255;
+  --line: 10 10 20;
+  --text: 14 14 18;
+  --text-muted: 92 94 104;
+
+  --cobalt: 24 64 220;
+  --magenta: 224 36 108;
+  --gold: 176 110 0; /* #B06E00 deeper amber for AA contrast on light */
+
+  --line-alpha: 0.1;
+  --grain-opacity: 0.055;
+  color-scheme: light;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Lenis manages scroll; disable native smooth when active to avoid double easing */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@layer base {
+  body {
+    @apply bg-ink text-ftext font-sans antialiased;
+    font-feature-settings: "ss01", "cv01";
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgb(var(--gold));
+    color: rgb(var(--bg));
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Visible focus for keyboard users */
+  :focus-visible {
+    outline: 2px solid rgb(var(--gold));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8 lg:px-10;
+  }
+
+  .hairline {
+    border-color: rgb(var(--line) / var(--line-alpha));
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.25em] text-muted;
+  }
+
+  /* Gradient text using the brand triad */
+  .text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      rgb(var(--cobalt)),
+      rgb(var(--magenta)) 45%,
+      rgb(var(--gold))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    background: rgb(var(--surface) / 0.6);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid rgb(var(--line) / var(--line-alpha));
+  }
+
+  /* Cartographic contour backdrop */
+  .contours {
+    background-image: radial-gradient(
+        circle at 50% 50%,
+        rgb(var(--line) / 0.05) 0,
+        rgb(var(--line) / 0.05) 1px,
+        transparent 1px,
+        transparent 28px
+      );
+    background-size: 56px 56px;
+  }
+}
+
+/* ============================================================
+   AMBIENT HERO WASH — soft, grainy iridescent colour field.
+   No sphere; just the cobalt / magenta / amber-gold palette
+   blended into a smooth wash that slowly drifts, plus grain.
+   ============================================================ */
+@keyframes auroraA {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-3%, 2.5%, 0) scale(1.08); }
+}
+@keyframes auroraB {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+  50% { transform: translate3d(3.5%, -2%, 0) scale(1); }
+}
+
+.hero-aurora-a,
+.hero-aurora-b {
+  position: absolute;
+  inset: -12%;
+  will-change: transform;
+}
+.hero-aurora-a {
+  animation: auroraA 28s ease-in-out infinite;
+}
+.hero-aurora-b {
+  animation: auroraB 34s ease-in-out infinite;
+}
+
+.hero-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+}
+
+/* Heavier local grain for the hero (analog texture) */
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Grain overlay — two layers (fine + coarse) for a filmic analog texture */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: calc(var(--grain-opacity) * 0.55);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+/* Custom cursor — only when a fine pointer is present (see CustomCursor.tsx) */
+.has-custom-cursor,
+.has-custom-cursor a,
+.has-custom-cursor button {
+  cursor: none;
+}
+
+/* Reduced motion: kill transforms/animations the design relies on */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .grain::after {
+    display: none;
+  }
+}
+
+/* Hide scrollbar on marquee/horizontal scroll regions */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
