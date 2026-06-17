@@ -25,6 +25,21 @@ export default function ProjectCard({ project, onOpen, className = "" }: Props) 
         className={`group/tilt relative flex h-full w-full flex-col overflow-hidden rounded-xl2 border border-line/10 bg-surface/40 p-6 text-left transition-colors ${accent.ring} sm:p-8`}
         data-cursor="magnet"
       >
+        {/* project image (full-bleed) with a dark overlay for legibility */}
+        {project.image && (
+          <>
+            <img
+              src={project.image}
+              alt=""
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover/tilt:scale-[1.04]"
+            />
+            <span
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/45"
+            />
+          </>
+        )}
         {/* resting accent glow */}
         <span
           aria-hidden

@@ -63,6 +63,16 @@ export default function ProjectModal({ project, onClose }: Props) {
               ✕
             </button>
 
+            {project.image && (
+              <div className="mb-6 overflow-hidden rounded-xl2 border border-line/10">
+                <img
+                  src={project.image}
+                  alt={`${project.name} preview`}
+                  className="h-48 w-full object-cover sm:h-64"
+                />
+              </div>
+            )}
+
             <span className={`font-mono text-xs uppercase tracking-[0.15em] ${accentText[project.accent]}`}>
               {project.category}
             </span>

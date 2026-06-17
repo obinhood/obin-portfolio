@@ -37,6 +37,7 @@ export type Project = {
   category: string;
   featured?: boolean;
   accent: "cobalt" | "magenta" | "gold";
+  image?: string; // optional card/modal visual, relative to /public
   problem: string;
   approach: string;
   result: string;
@@ -196,6 +197,7 @@ export const projects: Project[] = [
     category: "E-commerce · Cartography",
     featured: true,
     accent: "magenta",
+    image: "/projects/urban-lines.jpg",
     problem:
       "Runners and city-lovers want a premium, personal memento of a route or place, but generic map posters feel templated and the print quality rarely matches the moment.",
     approach:
@@ -214,6 +216,7 @@ export const projects: Project[] = [
     category: "Mobile · Safety",
     featured: true,
     accent: "cobalt",
+    image: "/projects/sola.jpg",
     problem:
       "Running alone, especially after dark, means constantly weighing routes against how safe and well-lit they feel, with no good tool to help.",
     approach:
