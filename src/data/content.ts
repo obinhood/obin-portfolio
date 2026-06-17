@@ -288,6 +288,7 @@ export const projects: Project[] = [
     role: "Researcher (UCL)",
     category: "Research · R",
     accent: "magenta",
+    image: "/projects/geodem.jpg",
     problem:
       "Mental-health outcomes vary sharply across a city, but the geodemographic drivers are easy to assert and hard to evidence.",
     approach:
