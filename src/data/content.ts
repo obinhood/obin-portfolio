@@ -270,6 +270,7 @@ export const projects: Project[] = [
     role: "Builder",
     category: "Climate · ESG",
     accent: "gold",
+    image: "/projects/carbon.jpg",
     problem:
       "SMEs need credible Scope 1-3 carbon accounting but enterprise tools are heavy and opaque about emission factors.",
     approach:
