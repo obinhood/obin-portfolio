@@ -1,17 +1,19 @@
 /**
- * Cloudflare Pages Function — GET /api/feeds?source=letterboxd|goodreads
+ * Cloudflare Worker entry point.
  *
- * Fetches the relevant RSS feed server-side (no browser CORS), parses it with
- * lightweight regex (the Workers runtime has no DOMParser), and returns clean
- * JSON. Responses are edge-cached for an hour. If anything fails it returns
- * `{ items: [] }` so the client gracefully falls back to the static lists.
+ * Serves the built Vite SPA from the [assets] directory (dist/) and handles the
+ * one dynamic route, GET /api/feeds, which proxies and parses the Letterboxd /
+ * Goodreads RSS server-side (no browser CORS) and returns clean JSON. Anything
+ * that isn't /api/feeds falls through to the static assets. Deployed with
+ * `wrangler deploy` (see wrangler.toml).
  *
  * Goodreads has no stable public username RSS, so its feed URL is read from the
- * GOODREADS_RSS environment variable (set it in the Pages dashboard). Leave it
- * unset and the books section simply uses the curated fallback.
+ * GOODREADS_RSS secret (set it with `wrangler secret put GOODREADS_RSS`). Leave
+ * it unset and the books section uses the curated fallback in content.ts.
  */
 
 interface Env {
+  ASSETS: { fetch: (request: Request) => Promise<Response> };
   GOODREADS_RSS?: string;
 }
 
@@ -38,11 +40,7 @@ function parseLetterboxd(xml: string): Item[] {
     const fallbackTitle = tag(block, "title");
     const title = filmTitle ?? fallbackTitle ?? "";
     if (!title) continue;
-    items.push({
-      title,
-      year: filmYear,
-      rating: ratingRaw ? Number(ratingRaw) : undefined,
-    });
+    items.push({ title, year: filmYear, rating: ratingRaw ? Number(ratingRaw) : undefined });
     if (items.length >= 10) break;
   }
   return items;
@@ -57,20 +55,13 @@ function parseGoodreads(xml: string): Item[] {
     if (!title) continue;
     const author = tag(block, "author_name");
     const ratingRaw = tag(block, "user_rating");
-    items.push({
-      title,
-      author,
-      rating: ratingRaw ? Number(ratingRaw) : undefined,
-    });
+    items.push({ title, author, rating: ratingRaw ? Number(ratingRaw) : undefined });
     if (items.length >= 8) break;
   }
   return items;
 }
 
-export const onRequestGet: (ctx: {
-  request: Request;
-  env: Env;
-}) => Promise<Response> = async ({ request, env }) => {
+async function handleFeeds(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const source = url.searchParams.get("source");
 
@@ -108,4 +99,15 @@ export const onRequestGet: (ctx: {
   } catch {
     return json([]);
   }
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+    if (url.pathname === "/api/feeds") {
+      return handleFeeds(request, env);
+    }
+    // Everything else: serve the static SPA.
+    return env.ASSETS.fetch(request);
+  },
 };

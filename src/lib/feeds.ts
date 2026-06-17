@@ -1,11 +1,11 @@
 import type { Movie, Book } from "@/data/content";
 
 /**
- * Live feed fetching. In production these hit the Cloudflare Pages Function at
- * /api/feeds (see functions/api/feeds.ts), which fetches and parses the
- * Letterboxd / Goodreads RSS server-side to avoid CORS. If the function is
- * unavailable (e.g. `vite dev` without wrangler) or the feed fails, the caller
- * falls back to the curated static lists in content.ts.
+ * Live feed fetching. In production these hit the Cloudflare Worker at
+ * /api/feeds (see worker/index.ts), which fetches and parses the Letterboxd /
+ * Goodreads RSS server-side to avoid CORS. If the route is unavailable (e.g.
+ * `vite dev` without wrangler) or the feed fails, the caller falls back to the
+ * curated static lists in content.ts.
  */
 
 type FeedItem = {

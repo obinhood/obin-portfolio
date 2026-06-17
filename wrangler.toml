@@ -1,10 +1,16 @@
 name = "obin-portfolio"
 compatibility_date = "2024-11-01"
-pages_build_output_dir = "dist"
+main = "worker/index.ts"
 
-# Deploy with:  npm run build && npx wrangler pages deploy dist
-# The Letterboxd/Goodreads feed proxy lives in functions/api/feeds.ts and is
-# picked up automatically by Cloudflare Pages Functions.
+# Serve the built Vite SPA as static assets; the Worker (main) only intercepts
+# /api/feeds and otherwise falls through to these files.
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+# Deploy:  npm run build && npx wrangler deploy
+# (Cloudflare's connected Git build runs `npm run build` then `npx wrangler deploy`.)
 #
 # Optional: set the Goodreads RSS URL so the books section goes live:
-#   npx wrangler pages secret put GOODREADS_RSS
+#   npx wrangler secret put GOODREADS_RSS
