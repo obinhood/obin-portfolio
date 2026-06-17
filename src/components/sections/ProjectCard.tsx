@@ -32,11 +32,11 @@ export default function ProjectCard({ project, onOpen, className = "" }: Props) 
               src={project.image}
               alt=""
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover/tilt:scale-[1.04]"
+              className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover/tilt:scale-[1.04]"
             />
             <span
               aria-hidden
-              className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/45"
+              className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/30"
             />
           </>
         )}

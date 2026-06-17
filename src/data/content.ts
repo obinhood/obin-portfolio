@@ -252,6 +252,7 @@ export const projects: Project[] = [
     role: "Builder",
     category: "Data product · Geospatial",
     accent: "cobalt",
+    image: "/projects/prague.jpg",
     problem:
       "Prague's property market moves daily, but listings sites show snapshots, not change: re-listings, price drops and time-on-market are invisible.",
     approach:
