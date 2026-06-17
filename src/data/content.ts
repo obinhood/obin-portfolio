@@ -227,24 +227,6 @@ export const projects: Project[] = [
     links: [],
   },
   {
-    slug: "stock-investment-tool",
-    name: "Equity Research Assistant",
-    tagline: "Decision-support for growth vs defensive allocation.",
-    year: "2025",
-    role: "Builder",
-    category: "Fintech · Research",
-    featured: true,
-    accent: "gold",
-    problem:
-      "Retail equity research is either shallow screeners or black-box tips, with no transparent, calibrated way to size conviction.",
-    approach:
-      "Built a pipeline (screen → gather → value → rank/size → review) with DCF, DDM and relative valuation, scenario distributions with probability-of-loss, and a backtest harness with Brier-score calibration.",
-    result:
-      "Conviction-scored, explicitly decision-support (not advice) suggestions pulling from yfinance, SEC EDGAR, FMP, Alpha Vantage and FRED.",
-    stack: ["Python", "DCF / DDM", "Backtesting", "SEC EDGAR", "FRED", "Calibration"],
-    links: [],
-  },
-  {
     slug: "prague-real-estate",
     name: "Prague Property Intelligence",
     tagline: "A daily market tracker for Prague real estate.",
