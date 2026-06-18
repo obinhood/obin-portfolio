@@ -190,7 +190,7 @@ export const experience: Experience[] = [
 export const projects: Project[] = [
   {
     slug: "urban-lines",
-    name: "Urban Lines",
+    name: "URBALINES",
     tagline: "Personalised marathon-route and city-map art prints.",
     year: "2024 — now",
     role: "Founder / full-stack & brand",
