@@ -227,6 +227,24 @@ export const projects: Project[] = [
     links: [],
   },
   {
+    slug: "side-quest",
+    name: "Side Quest",
+    tagline: "A gamified daily-adventures app with a pixel pet.",
+    year: "2025",
+    role: "Designer & builder",
+    category: "Mobile · Game",
+    accent: "magenta",
+    image: "/projects/sidequest.jpg",
+    problem:
+      "Habit and to-do apps feel like admin: streaks and checklists that nag rather than delight.",
+    approach:
+      "Reframed daily tasks as a tiny RPG: choose a pixel 'tamagotchi' that wanders your home screen, earn XP and level up, and collect artefacts, all in a playful Y2K / vaporwave interface.",
+    result:
+      "Light and dark prototypes plus a web build and a Supabase-backed version, covering onboarding, pet selection, XP and levelling, and quest screens.",
+    stack: ["React", "Supabase", "Pixel art", "Vaporwave UI", "Gamification"],
+    links: [],
+  },
+  {
     slug: "prague-real-estate",
     name: "Prague Property Intelligence",
     tagline: "A daily market tracker for Prague real estate.",
