@@ -54,21 +54,21 @@ export default function About() {
           <Reveal className="lg:pt-2">
             <div className="glass overflow-hidden rounded-xl2 p-2">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[1.1rem]">
-                {/* Monogram fallback; replace by adding public/portrait.jpg */}
+                {/* Monogram is the default; set profile.portrait to a real image
+                    path (e.g. "/portrait.jpg") to show a photo instead. */}
                 <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-cobalt/30 via-magenta/20 to-gold/30">
                   <span className="font-display text-[7rem] font-bold text-ftext/90">
                     {profile.initials}
                   </span>
                 </div>
-                <img
-                  src={profile.portrait}
-                  alt={`Portrait of ${profile.name}`}
-                  loading="lazy"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.display = "none";
-                  }}
-                  className="relative h-full w-full object-cover"
-                />
+                {profile.portrait && (
+                  <img
+                    src={profile.portrait}
+                    alt={`Portrait of ${profile.name}`}
+                    loading="lazy"
+                    className="relative h-full w-full object-cover"
+                  />
+                )}
                 <div className="contours absolute inset-0 opacity-30 mix-blend-overlay" />
               </div>
               <div className="flex items-start gap-3 px-3 py-4">

@@ -1,15 +1,10 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Sets up Lenis smooth scrolling and wires it into GSAP's ticker so
- * ScrollTrigger stays in sync. Honours prefers-reduced-motion by
- * skipping smoothing entirely. Exposes the Lenis instance on window
- * for nav anchor scrolling.
+ * Sets up Lenis smooth scrolling driven by a plain requestAnimationFrame loop.
+ * Honours prefers-reduced-motion by skipping smoothing entirely. Exposes the
+ * Lenis instance on window for programmatic scroll (nav links, modal lock).
  */
 export function useLenis() {
   useEffect(() => {
@@ -23,17 +18,18 @@ export function useLenis() {
       touchMultiplier: 1.4,
     });
 
-    // Expose for programmatic scroll (nav links, back-to-top).
+    // Expose for programmatic scroll (nav links, back-to-top, modal lock).
     (window as unknown as { lenis?: Lenis }).lenis = lenis;
 
-    lenis.on("scroll", ScrollTrigger.update);
-
-    const onRaf = (time: number) => lenis.raf(time * 1000);
-    gsap.ticker.add(onRaf);
-    gsap.ticker.lagSmoothing(0);
+    let raf = 0;
+    const loop = (time: number) => {
+      lenis.raf(time);
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
 
     return () => {
-      gsap.ticker.remove(onRaf);
+      cancelAnimationFrame(raf);
       lenis.destroy();
       (window as unknown as { lenis?: Lenis }).lenis = undefined;
     };

@@ -47,8 +47,6 @@ export type Project = {
 
 export type SkillGroup = { group: string; items: string[] };
 
-export type Stat = { value: number; label: string; prefix?: string; suffix?: string; decimals?: number };
-
 export type Movie = { title: string; year: string; rating: number; note?: string };
 export type Book = { title: string; author: string; rating: number };
 export type Interest = { title: string; body: string; tag: string };
@@ -66,7 +64,6 @@ export const profile = {
   location: "London, UK",
   email: "nguyenler@gmail.com",
   phone: "+44 7845 450678",
-  available: "Open to product strategy & AI product roles",
   // Short narrative bio for the About section.
   bio: [
     "I am Obin, a Czech-Vietnamese data and product person based in London, originally from Prague. For the better part of a decade I have turned messy, large-scale datasets into products and decisions, mostly at the meeting point of cities, movement, and infrastructure.",
@@ -75,8 +72,9 @@ export const profile = {
   // "Currently" one-liner for the About section.
   currently:
     "Building data products and a stack of side projects, training for a sub-4 marathon, and curating Vietnamese cinema with Star Nhà Ease.",
-  // TODO: drop a square portrait at public/portrait.jpg (≈800x800) to replace the monogram.
-  portrait: "/portrait.jpg",
+  // Empty = show the monogram. Add a ~800x800 image to public/ and set this to
+  // its path (e.g. "/portrait.jpg") to show a photo in the About card.
+  portrait: "",
 };
 
 export const socials: SocialLink[] = [
@@ -100,13 +98,6 @@ export const cv = {
   path: "/cv/Obin-Nguyen-CV.pdf",
   label: "Download CV",
 };
-
-export const stats: Stat[] = [
-  { value: 1.5, prefix: "£", suffix: "M", label: "Rail O-D product sold to TfL", decimals: 1 },
-  { value: 7, suffix: "+", label: "Years in data, analytics & product" },
-  { value: 20, suffix: "%", label: "AWS spend cut via pipeline optimisation" },
-  { value: 60, suffix: "%", label: "Faster data processing at Amey" },
-];
 
 export const experience: Experience[] = [
   {

@@ -36,7 +36,7 @@
 
   --cobalt: 24 64 220;
   --magenta: 224 36 108;
-  --gold: 176 110 0; /* #B06E00 deeper amber for AA contrast on light */
+  --gold: 156 98 0; /* #9C6200 deeper amber for AA contrast on light (text + on-gold labels) */
 
   --line-alpha: 0.1;
   --grain-opacity: 0.055;
@@ -185,27 +185,17 @@ html.lenis body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Grain overlay — two layers (fine + coarse) for a filmic analog texture */
+/* Grain overlay — a single fixed film-grain layer (one blended layer keeps the
+   analog texture without recompositing the viewport twice per frame). */
 .grain::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: var(--grain-opacity);
+  opacity: calc(var(--grain-opacity) * 1.2);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
-}
-
-.grain::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
-  opacity: calc(var(--grain-opacity) * 0.55);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
-  mix-blend-mode: soft-light;
 }
 
 /* Custom cursor — only when a fine pointer is present (see CustomCursor.tsx) */

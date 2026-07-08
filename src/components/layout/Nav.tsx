@@ -17,7 +17,19 @@ export default function Nav() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
+
+  // Close the mobile menu (and release the scroll lock) when the viewport grows
+  // to desktop, where the menu is hidden by CSS.
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onChange = (e: MediaQueryListEvent) => e.matches && setOpen(false);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   function go(href: string) {
     setOpen(false);
@@ -84,8 +96,9 @@ export default function Nav() {
             </a>
             <button
               type="button"
-              aria-label="Open menu"
+              aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
+              aria-controls="mobile-menu"
               onClick={() => setOpen((o) => !o)}
               className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 rounded-full border border-line/15 md:hidden"
             >
@@ -103,6 +116,7 @@ export default function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

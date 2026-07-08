@@ -72,6 +72,7 @@ async function handleFeeds(request: Request, env: Env): Promise<Response> {
         "content-type": "application/json; charset=utf-8",
         "cache-control": "public, max-age=3600, s-maxage=3600",
         "access-control-allow-origin": "*",
+        "x-content-type-options": "nosniff",
       },
     });
 

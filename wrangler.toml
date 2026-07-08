@@ -7,7 +7,9 @@ main = "worker/index.ts"
 [assets]
 directory = "./dist"
 binding = "ASSETS"
-not_found_handling = "single-page-application"
+# The site is a single page (hash-anchor nav), so unknown paths should be real
+# 404s (served from 404.html), not soft-404 index.html with a 200.
+not_found_handling = "404-page"
 
 # Deploy:  npm run build && npx wrangler deploy
 # (Cloudflare's connected Git build runs `npm run build` then `npx wrangler deploy`.)

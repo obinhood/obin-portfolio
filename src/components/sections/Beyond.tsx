@@ -19,7 +19,7 @@ function Stars({ rating }: { rating: number }) {
   const full = Math.floor(rating);
   const half = rating - full >= 0.5;
   return (
-    <span className="text-sm text-gold" aria-label={`${rating} out of 5`}>
+    <span className="text-sm text-gold" role="img" aria-label={`${rating} out of 5`}>
       {"★".repeat(full)}
       {half ? "½" : ""}
     </span>
@@ -122,7 +122,7 @@ export default function Beyond() {
               ))}
             </ul>
             {!goodreads.url && (
-              <p className="mt-4 font-mono text-[11px] text-muted/60">
+              <p className="mt-4 font-mono text-[11px] text-muted">
                 {/* TODO: add your Goodreads profile + RSS in content.ts to go live */}
                 Showing a curated list. Add your Goodreads RSS to pull this live.
               </p>
@@ -151,7 +151,7 @@ function FeedHeader({
         <h3 className="font-display text-2xl text-ftext">{title}</h3>
         <span
           className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] ${
-            live ? "text-gold" : "text-muted/60"
+            live ? "text-gold" : "text-muted"
           }`}
         >
           <span className={`h-1.5 w-1.5 rounded-full ${live ? "bg-gold" : "bg-muted/40"}`} />

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Project } from "@/data/content";
 
@@ -20,17 +20,59 @@ const stage = [
 ];
 
 export default function ProjectModal({ project, onClose }: Props) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  // Keep the latest onClose without re-running the effect (it changes identity
+  // on every parent render, which would thrash focus management).
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    if (project) {
-      document.addEventListener("keydown", onKey);
-      document.body.style.overflow = "hidden";
-    }
+    if (!project) return;
+    const lenis = (window as unknown as { lenis?: { stop: () => void; start: () => void } }).lenis;
+
+    // Remember what opened the dialog, freeze scroll (both native + Lenis), and
+    // move focus into the dialog.
+    triggerRef.current = document.activeElement as HTMLElement | null;
+    lenis?.stop();
+    document.body.style.overflow = "hidden";
+    // Focus the close button once the panel has committed + painted. A short
+    // timeout is more reliable than a single rAF across the enter animation.
+    const focusT = setTimeout(() => closeRef.current?.focus(), 60);
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onCloseRef.current();
+        return;
+      }
+      // Trap Tab within the dialog.
+      if (e.key === "Tab" && panelRef.current) {
+        const items = panelRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", onKey);
+
     return () => {
+      clearTimeout(focusT);
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      lenis?.start();
+      triggerRef.current?.focus?.();
     };
-  }, [project, onClose]);
+  }, [project]);
 
   return (
     <AnimatePresence>
@@ -47,6 +89,8 @@ export default function ProjectModal({ project, onClose }: Props) {
           <div className="absolute inset-0 bg-ink/80 backdrop-blur-md" onClick={onClose} />
 
           <motion.div
+            ref={panelRef}
+            data-lenis-prevent
             initial={{ y: 40, opacity: 0, scale: 0.98 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 30, opacity: 0, scale: 0.98 }}
@@ -54,9 +98,10 @@ export default function ProjectModal({ project, onClose }: Props) {
             className="relative z-10 max-h-[88vh] w-full max-w-3xl overflow-y-auto rounded-t-xl2 border border-line/15 bg-ink-soft p-7 sm:rounded-xl2 sm:p-10"
           >
             <button
+              ref={closeRef}
               type="button"
               onClick={onClose}
-              aria-label="Close"
+              aria-label="Close case study"
               className="absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full border border-line/15 text-muted transition-colors hover:border-magenta hover:text-magenta"
               data-cursor="magnet"
             >
@@ -80,7 +125,7 @@ export default function ProjectModal({ project, onClose }: Props) {
               {project.name}
             </h3>
             <p className="mt-2 text-lg text-muted">{project.tagline}</p>
-            <p className="mt-1 font-mono text-xs text-muted/70">
+            <p className="mt-1 font-mono text-xs text-muted">
               {project.year} · {project.role}
             </p>
 

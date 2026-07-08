@@ -3,7 +3,7 @@
 A bold, animated personal portfolio that doubles as an online CV for **Le Nghia Nguyen (Obin)**.
 Design system: **Electric Cartography** (ink-black base, cobalt/magenta/amber-gold accents, cartographic motifs).
 
-Built with **Vite + React + TypeScript + Tailwind**, **Framer Motion**, **GSAP/ScrollTrigger** and **Lenis** smooth scroll. Deploys as a static site to **Cloudflare Pages** at **obinle.com**.
+Built with **Vite + React + TypeScript + Tailwind**, **Framer Motion** and **Lenis** smooth scroll. Deploys as a **Cloudflare Worker** (static assets + a small `/api/feeds` proxy) at **obinle.com**.
 
 ---
 
@@ -36,7 +36,7 @@ Design tokens (colours, fonts, theme) live in **[`src/index.css`](src/index.css)
 
 Hero · About · Experience (CV timeline) · Projects (pinned horizontal gallery + case-study modals) · Skills · Beyond work (Letterboxd / Goodreads + interests) · Contact.
 
-Animation: kinetic split-text, scroll reveals, animated mesh hero canvas, pinned horizontal project scroll, magnetic buttons, tilt + spotlight cards, custom cursor, marquee, count-ups, theme toggle. All respect `prefers-reduced-motion`.
+Animation: kinetic split-text, scroll reveals, a grainy iridescent ambient background, pinned horizontal project scroll, magnetic buttons, tilt + spotlight cards, custom cursor, marquee, theme toggle. All respect `prefers-reduced-motion`.
 
 ---
 

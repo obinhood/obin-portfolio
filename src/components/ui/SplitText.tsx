@@ -35,12 +35,14 @@ export default function SplitText({
   return (
     <Tag
       className={className}
-      aria-label={text}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
       transition={{ staggerChildren: stagger, delayChildren: delay }}
     >
+      {/* Real, screen-reader-visible text: gives the element its accessible name
+          via name-from-content (aria-label is ignored on a generic span). */}
+      <span className="sr-only">{text}</span>
       {words.map((word, i) => (
         <span
           key={`${word}-${i}`}
