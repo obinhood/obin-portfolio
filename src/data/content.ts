@@ -211,28 +211,95 @@ export const projects: Project[] = [
     problem:
       "Running alone, especially after dark, means constantly weighing routes against how safe and well-lit they feel, with no good tool to help.",
     approach:
-      "Designed safety-weighted routing that blends data.police.uk crime data with OpenStreetMap street-lighting, plus SOS and fake-call features, all in a calm 'Sola' visual language.",
+      "Safety-weighted routing that blends UK Police crime data with OpenStreetMap street-lighting, plus live location sharing, check-in escalation, SOS and a fake call, in a calm 'Sola' visual language.",
     result:
-      "A complete design and spec with a backend and iOS concept: routes optimised for light and lower-risk streets rather than purely the shortest path.",
-    stack: ["Swift / iOS", "Routing", "data.police.uk", "OSM lighting", "Python backend"],
+      "A working MVP pairing an Expo React Native app with a FastAPI backend and a 38-test suite, kept to a private design-partner pilot.",
+    stack: ["Expo / React Native", "FastAPI", "UK Police API", "OSM lighting", "Python"],
     links: [],
   },
   {
-    slug: "side-quest",
-    name: "Side Quest",
-    tagline: "A gamified daily-adventures app with a pixel pet.",
-    year: "2025",
-    role: "Designer & builder",
-    category: "Mobile · Game",
-    accent: "magenta",
-    image: "/projects/sidequest.jpg",
+    slug: "carbonsense",
+    name: "CarbonSense",
+    tagline: "An honest, multi-model personal carbon footprint platform for the UK and EU.",
+    year: "2026",
+    role: "Founder / full-stack",
+    category: "Climate · ESG",
+    accent: "gold",
     problem:
-      "Habit and to-do apps feel like admin: streaks and checklists that nag rather than delight.",
+      "Personal carbon calculators tend to hand you one confident number with no sense of how it was worked out or how much to trust it.",
     approach:
-      "Reframed daily tasks as a tiny RPG: choose a pixel 'tamagotchi' that wanders your home screen, earn XP and level up, and collect artefacts, all in a playful Y2K / vaporwave interface.",
+      "One reusable TypeScript engine blends survey, spend and activity data, reconciles the best method per category, and carries a method tag and uncertainty band on every number. The same engine powers a consumer app, an embeddable partner widget and a metered HTTP API.",
     result:
-      "Light and dark prototypes plus a web build and a Supabase-backed version, covering onboarding, pet selection, XP and levelling, and quest screens.",
-    stack: ["React", "Supabase", "Pixel art", "Vaporwave UI", "Gamification"],
+      "A working prototype localised across the UK, Germany, France, Spain and Poland, with market-based electricity, aviation radiative forcing, per-item food LCA and GDPR export and erase built in.",
+    stack: ["TypeScript", "React 18", "Vite", "Node", "Carbon engine", "Partner SDK / API"],
+    links: [],
+  },
+  {
+    slug: "adloop",
+    name: "AdLoop",
+    tagline: "Turn a product URL into paid-social ads that learn from your own performance.",
+    year: "2026",
+    role: "Founder / full-stack",
+    category: "SaaS · Generative AI",
+    accent: "magenta",
+    problem:
+      "Small Shopify sellers need launch-ready paid-social creative fast, but generic ad templates ignore what actually converts for their own store.",
+    approach:
+      "A FastAPI and Next.js SaaS takes a product URL and generates conversion scripts, static image ads in every aspect ratio and UGC-style avatar videos. Every provider sits behind a swappable adapter, and an insights loop scores each creative against the store's own history.",
+    result:
+      "An MVP with credit metering, Stripe billing, an async render pipeline and around 80 passing tests, running end to end in a zero-infra mock mode with real adapters wired behind interfaces.",
+    stack: ["Python", "FastAPI", "Next.js", "Anthropic API", "HeyGen", "Stripe", "Supabase"],
+    links: [],
+  },
+  {
+    slug: "applyforge",
+    name: "ApplyForge",
+    tagline: "A human-gated, truthfulness-first autopilot for job applications.",
+    year: "2026",
+    role: "Builder",
+    category: "AI · Agentic automation",
+    accent: "cobalt",
+    problem:
+      "Most job-application bots optimise for volume and will happily invent facts to beat an applicant tracking system.",
+    approach:
+      "Six coordinated agents for sourcing, profile, application, tracking, interview prep and outreach run behind hard safety walls: every generated claim must trace to an evidence ledger and pass an entailment check, nothing is submitted without explicit sign-off, and truthfulness deliberately outranks ATS score.",
+    result:
+      "A core build with live Greenhouse and Lever sourcing, a Next.js console and 130-plus passing tests under strict typing and import-linter contracts.",
+    stack: ["Python", "FastAPI", "Next.js", "PostgreSQL", "pgvector", "Playwright", "Claude"],
+    links: [],
+  },
+  {
+    slug: "stavi",
+    name: "Stavi",
+    tagline: "AI-assisted project management for small Czech construction teams.",
+    year: "2026",
+    role: "Founder / full-stack & mobile",
+    category: "Web & Mobile · Construction",
+    accent: "gold",
+    problem:
+      "Small Czech building crews run projects across tools that ignore their trade specifics, from CZK budgets with DPH to permits, retention invoicing and the site diary.",
+    approach:
+      "A shared TypeScript domain layer powers both a Next.js web app and an Expo React Native app, with a crew of AI specialists that turn plain-Czech commands and receipt photos into tasks, diary entries and ISDOC invoices. AI runs on Claude and falls back to an on-device engine so it works offline.",
+    result:
+      "A trilingual (Czech, English, Vietnamese) MVP, feature-complete on the offline path and backed by Supabase with per-user row-level security.",
+    stack: ["Next.js 16", "Expo / React Native", "TypeScript", "Supabase", "Claude", "RLS"],
+    links: [],
+  },
+  {
+    slug: "rental-pms",
+    name: "Czech Rental PMS",
+    tagline: "Multi-channel property management for Czech short-term rentals, trilingual in EN, CS and VI.",
+    year: "2026",
+    role: "Founder / full-stack",
+    category: "Web app · PropTech",
+    accent: "magenta",
+    problem:
+      "Short-term-rental operators juggle bookings across several channels with a constant risk of double-bookings, on top of Czech guest-registration and tourist-tax duties, and their teams work in different languages.",
+    approach:
+      "A Next.js PMS and channel manager built around one master availability ledger, with double-bookings blocked at the database layer through a Postgres exclusion constraint rather than only in app code. It adds a multi-property calendar, two-way iCal sync, Czech compliance, housekeeping and financials.",
+    result:
+      "A complete, trilingual core with database integration tests proving the double-booking guard and CI on every push, with Stripe, email and live channel APIs staged behind feature flags.",
+    stack: ["Next.js 15", "React 19", "Prisma", "PostgreSQL", "Auth.js", "next-intl", "Stripe"],
     links: [],
   },
   {
@@ -254,6 +321,58 @@ export const projects: Project[] = [
     links: [],
   },
   {
+    slug: "prague-hall-booking",
+    name: "Prague Hall Booking",
+    tagline: "One place to book rehearsal space across Prague's fragmented venues.",
+    year: "2026",
+    role: "Builder",
+    category: "Full-stack · Booking platform",
+    accent: "gold",
+    problem:
+      "Prague's rehearsal and hall space is scattered across many independent venues, each on its own booking island of portals, calendars or just phone and email, so renters have to check every venue separately.",
+    approach:
+      "A Postgres and PostGIS model makes double-bookings structurally impossible via a single exclusion constraint, a NestJS API handles attribute, geo and time-window search, a Next.js app drives booking, and a connector layer reconciles each venue's availability from iCal feeds and booking SaaS without touching the core.",
+    result:
+      "A verified Phase 1 slice: the anti-double-booking race passes, real venue iCal feeds import genuine busy periods, and request-mode booking, a provider dashboard and a self-serve onboarding wizard all work.",
+    stack: ["Next.js 15", "NestJS", "PostgreSQL", "PostGIS", "iCal / RRULE", "Docker"],
+    links: [],
+  },
+  {
+    slug: "side-quest",
+    name: "Side Quest",
+    tagline: "A gamified daily-adventures app with a pixel pet.",
+    year: "2025",
+    role: "Designer & builder",
+    category: "Mobile · Game",
+    accent: "magenta",
+    image: "/projects/sidequest.jpg",
+    problem:
+      "Habit and to-do apps feel like admin: streaks and checklists that nag rather than delight.",
+    approach:
+      "Reframed daily tasks as a tiny RPG: choose a pixel 'tamagotchi' that wanders your home screen, earn XP and level up, and collect artefacts, all in a playful Y2K / vaporwave interface.",
+    result:
+      "A multi-platform MVP: a React and Vite web app plus an Expo React Native twin sharing one Node and Express backend, covering onboarding, pet selection, XP and levelling, and quests.",
+    stack: ["React", "Vite", "Node / Express", "PostgreSQL", "Expo", "Gamification"],
+    links: [],
+  },
+  {
+    slug: "equity-desk",
+    name: "Equity Research Desk",
+    tagline: "A research and technical-signal workspace for equities that never places a trade.",
+    year: "2026",
+    role: "Builder",
+    category: "Web app · Fintech",
+    accent: "cobalt",
+    problem:
+      "Long-horizon valuation and short-term technical signals usually live in separate tools, with no honest measure of whether a signal has any real edge.",
+    approach:
+      "One deterministic Python engine feeds a research desk: DCF, DDM and relative valuation, a regime-aware composite of around 23 technical indicators, probability and expectancy with quarter-Kelly sizing, and a walk-forward backtest reporting net-of-cost expectancy and a Brier score, served over FastAPI REST and WebSockets.",
+    result:
+      "A working, decision-support-only platform with 124 deterministic tests and CI, running free on delayed data. It is deliberately honest that its own backtest shows roughly break-even expectancy before costs, and it never executes a trade.",
+    stack: ["Python", "FastAPI", "WebSockets", "pandas", "numpy", "yfinance", "Supabase"],
+    links: [],
+  },
+  {
     slug: "lca-calculator",
     name: "Carbon Footprint MVP",
     tagline: "Organisational carbon accounting across Scopes 1–3.",
@@ -269,6 +388,23 @@ export const projects: Project[] = [
     result:
       "A FastAPI + SQLite tool that makes the methodology and factor versions transparent and auditable.",
     stack: ["FastAPI", "SQLite", "DEFRA factors", "GHG Protocol", "Reporting"],
+    links: [],
+  },
+  {
+    slug: "newsletter-summariser",
+    name: "Newsletter Summariser",
+    tagline: "A daily digest that reads your newsletters so you don't have to.",
+    year: "2025",
+    role: "Builder",
+    category: "AI · Automation",
+    accent: "cobalt",
+    problem:
+      "Newsletter subscriptions pile up faster than anyone can read them, burying the few things worth knowing each day.",
+    approach:
+      "A Python prototype connects to Gmail, pulls the day's labelled newsletters, cleans the HTML, summarises each with an LLM and assembles a single daily digest email.",
+    result:
+      "A working local prototype covering the full fetch, clean, summarise and digest loop.",
+    stack: ["Python", "Gmail API", "OpenAI", "HTML parsing"],
     links: [],
   },
   {
