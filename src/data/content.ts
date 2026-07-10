@@ -225,6 +225,7 @@ export const projects: Project[] = [
     role: "Founder / full-stack",
     category: "Climate · ESG",
     accent: "gold",
+    image: "/projects/carbonsense.jpg",
     problem:
       "Personal carbon calculators tend to hand you one confident number with no sense of how it was worked out or how much to trust it.",
     approach:
@@ -242,6 +243,7 @@ export const projects: Project[] = [
     role: "Founder / full-stack",
     category: "SaaS · Generative AI",
     accent: "magenta",
+    image: "/projects/adloop.jpg",
     problem:
       "Small Shopify sellers need launch-ready paid-social creative fast, but generic ad templates ignore what actually converts for their own store.",
     approach:
@@ -259,6 +261,7 @@ export const projects: Project[] = [
     role: "Builder",
     category: "AI · Agentic automation",
     accent: "cobalt",
+    image: "/projects/applyforge.jpg",
     problem:
       "Most job-application bots optimise for volume and will happily invent facts to beat an applicant tracking system.",
     approach:
@@ -276,6 +279,7 @@ export const projects: Project[] = [
     role: "Founder / full-stack & mobile",
     category: "Web & Mobile · Construction",
     accent: "gold",
+    image: "/projects/stavi.jpg",
     problem:
       "Small Czech building crews run projects across tools that ignore their trade specifics, from CZK budgets with DPH to permits, retention invoicing and the site diary.",
     approach:
@@ -293,6 +297,7 @@ export const projects: Project[] = [
     role: "Founder / full-stack",
     category: "Web app · PropTech",
     accent: "magenta",
+    image: "/projects/rental-pms.jpg",
     problem:
       "Short-term-rental operators juggle bookings across several channels with a constant risk of double-bookings, on top of Czech guest-registration and tourist-tax duties, and their teams work in different languages.",
     approach:
@@ -328,6 +333,7 @@ export const projects: Project[] = [
     role: "Builder",
     category: "Full-stack · Booking platform",
     accent: "gold",
+    image: "/projects/prague-hall-booking.jpg",
     problem:
       "Prague's rehearsal and hall space is scattered across many independent venues, each on its own booking island of portals, calendars or just phone and email, so renters have to check every venue separately.",
     approach:
@@ -363,6 +369,7 @@ export const projects: Project[] = [
     role: "Builder",
     category: "Web app · Fintech",
     accent: "cobalt",
+    image: "/projects/equity-desk.jpg",
     problem:
       "Long-horizon valuation and short-term technical signals usually live in separate tools, with no honest measure of whether a signal has any real edge.",
     approach:
@@ -398,6 +405,7 @@ export const projects: Project[] = [
     role: "Builder",
     category: "AI · Automation",
     accent: "cobalt",
+    image: "/projects/newsletter-summariser.jpg",
     problem:
       "Newsletter subscriptions pile up faster than anyone can read them, burying the few things worth knowing each day.",
     approach:
