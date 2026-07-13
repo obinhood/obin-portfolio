@@ -441,24 +441,6 @@ export const projects: Project[] = [
     links: [],
   },
   {
-    slug: "newsletter-summariser",
-    name: "Newsletter Summariser",
-    tagline: "A daily digest that reads your newsletters so you don't have to.",
-    year: "2025",
-    role: "Builder",
-    category: "AI · Automation",
-    accent: "cobalt",
-    image: "/projects/newsletter-summariser.jpg",
-    problem:
-      "Newsletter subscriptions pile up faster than anyone can read them, burying the few things worth knowing each day.",
-    approach:
-      "A Python prototype connects to Gmail, pulls the day's labelled newsletters, cleans the HTML, summarises each with an LLM and assembles a single daily digest email.",
-    result:
-      "A working local prototype covering the full fetch, clean, summarise and digest loop.",
-    stack: ["Python", "Gmail API", "OpenAI", "HTML parsing"],
-    links: [],
-  },
-  {
     slug: "geodem-mental-health",
     name: "Geodemographics of Mental Health",
     tagline: "Spatial patterns of mental health in urban London.",
