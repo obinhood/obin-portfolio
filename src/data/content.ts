@@ -38,6 +38,7 @@ export type Project = {
   featured?: boolean;
   accent: "cobalt" | "magenta" | "gold";
   image?: string; // optional card/modal visual, relative to /public
+  gallery?: string[]; // extra screenshots shown in the case-study modal
   problem: string;
   approach: string;
   result: string;
@@ -189,6 +190,12 @@ export const projects: Project[] = [
     featured: true,
     accent: "magenta",
     image: "/projects/urban-lines.jpg",
+    gallery: [
+      "/projects/gallery/urban-lines-1.jpg",
+      "/projects/gallery/urban-lines-2.jpg",
+      "/projects/gallery/urban-lines-3.jpg",
+      "/projects/gallery/urban-lines-4.jpg",
+    ],
     problem:
       "Runners and city-lovers want a premium, personal memento of a route or place, but generic map posters feel templated and the print quality rarely matches the moment.",
     approach:
@@ -226,6 +233,12 @@ export const projects: Project[] = [
     category: "Climate · ESG",
     accent: "gold",
     image: "/projects/carbonsense.jpg",
+    gallery: [
+      "/projects/gallery/carbonsense-1.jpg",
+      "/projects/gallery/carbonsense-2.jpg",
+      "/projects/gallery/carbonsense-3.jpg",
+      "/projects/gallery/carbonsense-4.jpg",
+    ],
     problem:
       "Personal carbon calculators tend to hand you one confident number with no sense of how it was worked out or how much to trust it.",
     approach:
@@ -244,6 +257,12 @@ export const projects: Project[] = [
     category: "SaaS · Generative AI",
     accent: "magenta",
     image: "/projects/adloop.jpg",
+    gallery: [
+      "/projects/gallery/adloop-1.jpg",
+      "/projects/gallery/adloop-2.jpg",
+      "/projects/gallery/adloop-3.jpg",
+      "/projects/gallery/adloop-4.jpg",
+    ],
     problem:
       "Small Shopify sellers need launch-ready paid-social creative fast, but generic ad templates ignore what actually converts for their own store.",
     approach:
@@ -262,6 +281,12 @@ export const projects: Project[] = [
     category: "AI · Agentic automation",
     accent: "cobalt",
     image: "/projects/applyforge.jpg",
+    gallery: [
+      "/projects/gallery/applyforge-1.jpg",
+      "/projects/gallery/applyforge-2.jpg",
+      "/projects/gallery/applyforge-3.jpg",
+      "/projects/gallery/applyforge-4.jpg",
+    ],
     problem:
       "Most job-application bots optimise for volume and will happily invent facts to beat an applicant tracking system.",
     approach:
@@ -280,6 +305,12 @@ export const projects: Project[] = [
     category: "Web & Mobile · Construction",
     accent: "gold",
     image: "/projects/stavi.jpg",
+    gallery: [
+      "/projects/gallery/stavi-1.jpg",
+      "/projects/gallery/stavi-2.jpg",
+      "/projects/gallery/stavi-3.jpg",
+      "/projects/gallery/stavi-4.jpg",
+    ],
     problem:
       "Small Czech building crews run projects across tools that ignore their trade specifics, from CZK budgets with DPH to permits, retention invoicing and the site diary.",
     approach:
@@ -291,13 +322,19 @@ export const projects: Project[] = [
   },
   {
     slug: "rental-pms",
-    name: "Czech Rental PMS",
+    name: "Praha Stays",
     tagline: "Multi-channel property management for Czech short-term rentals, trilingual in EN, CS and VI.",
     year: "2026",
     role: "Founder / full-stack",
     category: "Web app · PropTech",
     accent: "magenta",
     image: "/projects/rental-pms.jpg",
+    gallery: [
+      "/projects/gallery/rental-pms-1.jpg",
+      "/projects/gallery/rental-pms-2.jpg",
+      "/projects/gallery/rental-pms-3.jpg",
+      "/projects/gallery/rental-pms-4.jpg",
+    ],
     problem:
       "Short-term-rental operators juggle bookings across several channels with a constant risk of double-bookings, on top of Czech guest-registration and tourist-tax duties, and their teams work in different languages.",
     approach:
@@ -363,19 +400,25 @@ export const projects: Project[] = [
   },
   {
     slug: "equity-desk",
-    name: "Equity Research Desk",
+    name: "EquityDesk",
     tagline: "A research and technical-signal workspace for equities that never places a trade.",
     year: "2026",
     role: "Builder",
     category: "Web app · Fintech",
     accent: "cobalt",
     image: "/projects/equity-desk.jpg",
+    gallery: [
+      "/projects/gallery/equity-desk-1.jpg",
+      "/projects/gallery/equity-desk-2.jpg",
+      "/projects/gallery/equity-desk-3.jpg",
+      "/projects/gallery/equity-desk-4.jpg",
+    ],
     problem:
       "Long-horizon valuation and short-term technical signals usually live in separate tools, with no honest measure of whether a signal has any real edge.",
     approach:
-      "One deterministic Python engine feeds a research desk: DCF, DDM and relative valuation, a regime-aware composite of around 23 technical indicators, probability and expectancy with quarter-Kelly sizing, and a walk-forward backtest reporting net-of-cost expectancy and a Brier score, served over FastAPI REST and WebSockets.",
+      "Six tabs over one deterministic Python engine: a real-time Trading Desk (regime-aware buy/sell signals, probability and expectancy with quarter-Kelly sizing), a whole-market scan across the S&P 1500, a news desk mapping headlines to the tickers they tend to move, a cross-instrument ideas shortlist, a positions and PnL tracker, and a fundamental Research pipeline of DCF, DDM and relative valuation.",
     result:
-      "A working, decision-support-only platform with 124 deterministic tests and CI, running free on delayed data. It is deliberately honest that its own backtest shows roughly break-even expectancy before costs, and it never executes a trade.",
+      "A working, decision-support-only platform with a large deterministic test suite, CI and live WebSocket alerts, running free on delayed data. It is deliberately honest that its own backtest shows roughly break-even expectancy before costs, and it never places a trade or moves money.",
     stack: ["Python", "FastAPI", "WebSockets", "pandas", "numpy", "yfinance", "Supabase"],
     links: [],
   },
@@ -391,9 +434,9 @@ export const projects: Project[] = [
     problem:
       "SMEs need credible Scope 1-3 carbon accounting but enterprise tools are heavy and opaque about emission factors.",
     approach:
-      "Built an LCA MVP with CSV upload, a DEFRA-style emission-factor resolver with version pinning, QA checks, an AR5/AR6 switch and report export.",
+      "Built an LCA MVP with CSV upload, a DEFRA-style emission-factor resolver with version pinning, QA checks, an AR5/AR6 switch and report export, then grew it into a compliance tool.",
     result:
-      "A FastAPI + SQLite tool that makes the methodology and factor versions transparent and auditable.",
+      "A FastAPI + SQLite tool that keeps methodology and factor versions transparent and auditable, now extended with an API-key lifecycle and compliance renderers for EU Taxonomy, UK ETS and ESOS.",
     stack: ["FastAPI", "SQLite", "DEFRA factors", "GHG Protocol", "Reporting"],
     links: [],
   },
