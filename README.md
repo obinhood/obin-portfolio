@@ -1,7 +1,7 @@
 # Obin Nguyen — Portfolio & CV
 
 A bold, animated personal portfolio that doubles as an online CV for **Le Nghia Nguyen (Obin)**.
-Design system: **Electric Cartography** (ink-black base, cobalt/magenta/amber-gold accents, cartographic motifs).
+Design system: **Atlas**, an editorial, cartographic look taken from the URBANLINES prints: a night edition by default (warm charcoal, soft ink) with a paper edition on the toggle, a muted vermilion route line, slate water and moss; Instrument Serif with Geist and Geist Mono; quiet contour-line terrain drawn live on canvas.
 
 Built with **Vite + React + TypeScript + Tailwind**, **Framer Motion** and **Lenis** smooth scroll. Deploys as a **Cloudflare Worker** (static assets + a small `/api/feeds` proxy) at **obinle.com**.
 
@@ -26,7 +26,7 @@ npm run typecheck  # tsc --noEmit
 
 ## Edit content (no component edits needed)
 
-Everything you can read on the site lives in **[`src/data/content.ts`](src/data/content.ts)** — typed, with comments. Change copy, projects, experience, skills, interests, links, the tagline, etc. there and the UI updates. Anything still needing a value is marked `TODO:` (search the file for them).
+Everything you can read on the site lives in **[`src/data/content.ts`](src/data/content.ts)** (copy, experience, skills, interests, links) and **[`src/data/projects.ts`](src/data/projects.ts)** (the work). Both are typed, with comments; change them and the UI updates. Wrap a phrase in `*asterisks*` in headings and the statement to set it in italic. Anything still needing a value is marked `TODO:` (search the file for them).
 
 Design tokens (colours, fonts, theme) live in **[`src/index.css`](src/index.css)** (CSS variables, light + dark) and **[`tailwind.config.js`](tailwind.config.js)**.
 
@@ -86,12 +86,12 @@ Search the project for `TODO:` — current placeholders:
 
 | Item | Where | Notes |
 |------|-------|-------|
-| **Portrait photo** | `public/portrait.jpg` | Drop an ~800×800 image; an `ON` monogram shows until then (`profile.portrait` in `content.ts`). |
+| **Portrait photo** | `public/portrait.jpg` | Optional. Drop a ~1000×1250 image and set `profile.portrait`; it replaces the London contour plate in the Prague/London diptych. |
 | **CV PDF** | `public/cv/Obin-Nguyen-CV.pdf` | A copy of your general CV is already here. Replace to update the download. |
 | **Goodreads** | `goodreads` in `content.ts` + `GOODREADS_RSS` env | Add profile URL + RSS to make the books list live. |
 | **Letterboxd favourites** | `moviesFallback` in `content.ts` | Curated fallback list; edit to taste (live feed overrides it when reachable). |
-| **OG image (PNG)** | `public/og-image.svg` | A branded SVG is in place and referenced in `index.html`. For Twitter/Facebook (which don't render SVG OG), export a **1200×630 PNG** to `public/og-image.png` and switch the two `og:image` / `twitter:image` URLs in `index.html` back to `.png`. |
-| **Project links** | `projects[].links` in `content.ts` | Only Urban Lines has a live link; add repo/live URLs to others as they go public. |
+| **OG image** | `public/og-image.png` | 1200×630 PNG in the Atlas style (source art in `og-image.svg`), referenced by the `og:image` / `twitter:image` tags. |
+| **Project links** | `projects[].links` in `projects.ts` | Only URBANLINES has a live link; add repo/live URLs to others as they go public. |
 
 Nothing here is fabricated — experience, dates, education and projects come from your CV and project folders.
 

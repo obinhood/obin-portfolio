@@ -13,17 +13,23 @@ type Props = {
 };
 
 const base =
-  "relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-mono text-sm uppercase tracking-[0.12em] transition-colors duration-300 will-change-transform";
+  "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3.5 font-mono text-[12px] uppercase tracking-[0.14em] transition-colors duration-500 will-change-transform";
 
 const variants = {
-  solid: "bg-gold text-ink hover:bg-gold/90",
-  outline: "border border-line/20 text-ftext hover:border-gold hover:text-gold",
-  ghost: "text-ftext hover:text-gold",
+  solid: "bg-ink text-paper",
+  outline: "border border-rule/25 text-ink hover:text-paper",
+  ghost: "text-ink hover:text-signal-ink",
+};
+
+const wipe = {
+  solid: "bg-signal-ink",
+  outline: "bg-ink",
+  ghost: "",
 };
 
 /**
- * Button / link that magnetically follows the cursor and nudges its label.
- * Falls back to a static button when reduced motion is requested.
+ * Pill button / link that leans towards the cursor; a colour wipe rises from
+ * the baseline on hover. Static when reduced motion is requested.
  */
 export default function MagneticButton({
   children,
@@ -45,10 +51,8 @@ export default function MagneticButton({
   function handleMove(e: MouseEvent) {
     if (reduce || !ref.current) return;
     const r = ref.current.getBoundingClientRect();
-    const mx = e.clientX - (r.left + r.width / 2);
-    const my = e.clientY - (r.top + r.height / 2);
-    x.set(mx * 0.35);
-    y.set(my * 0.4);
+    x.set((e.clientX - (r.left + r.width / 2)) * 0.12);
+    y.set((e.clientY - (r.top + r.height / 2)) * 0.18);
   }
   function handleLeave() {
     x.set(0);
@@ -56,7 +60,17 @@ export default function MagneticButton({
   }
 
   const cls = `${base} ${variants[variant]} ${className}`;
-  const content = <span className="pointer-events-none relative z-10">{children}</span>;
+  const content = (
+    <>
+      {wipe[variant] && (
+        <span
+          aria-hidden
+          className={`absolute inset-x-0 bottom-0 h-full origin-bottom scale-y-0 rounded-full ${wipe[variant]} transition-transform duration-500 ease-expo group-hover:scale-y-100`}
+        />
+      )}
+      <span className="pointer-events-none relative z-10 inline-flex items-center gap-2">{children}</span>
+    </>
+  );
 
   const motionProps = {
     ref,
@@ -64,7 +78,7 @@ export default function MagneticButton({
     style: { x: sx, y: sy },
     onMouseMove: handleMove,
     onMouseLeave: handleLeave,
-    "data-cursor": "magnet",
+    "data-cursor": "hide",
     "aria-label": ariaLabel,
   } as const;
 
