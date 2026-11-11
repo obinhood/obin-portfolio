@@ -1,14 +1,13 @@
 import { useLenis } from "@/lib/useLenis";
 import Grain from "@/components/layout/Grain";
 import CustomCursor from "@/components/layout/CustomCursor";
-import ScrollProgress from "@/components/layout/ScrollProgress";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/hero/Hero";
-import About from "@/components/sections/About";
+import Statement from "@/components/sections/Statement";
+import Work from "@/components/sections/Work";
 import Experience from "@/components/sections/Experience";
-import Projects from "@/components/sections/Projects";
-import Skills from "@/components/sections/Skills";
+import Toolkit from "@/components/sections/Toolkit";
 import Beyond from "@/components/sections/Beyond";
 import Contact from "@/components/sections/Contact";
 
@@ -17,16 +16,21 @@ export default function App() {
 
   return (
     <>
-      <ScrollProgress />
+      <a
+        href="#work"
+        className="label fixed left-4 top-4 z-[10002] -translate-y-24 rounded-full bg-ink px-4 py-2 text-paper focus:translate-y-0"
+      >
+        Skip to work
+      </a>
       <Grain />
       <CustomCursor />
-      <Nav />
+      <Nav ready />
       <main>
-        <Hero />
-        <About />
+        <Hero ready />
+        <Statement />
+        <Work />
         <Experience />
-        <Projects />
-        <Skills />
+        <Toolkit />
         <Beyond />
         <Contact />
       </main>

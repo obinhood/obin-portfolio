@@ -44,6 +44,10 @@ export function scrollToAnchor(href: string) {
   if (lenis) {
     lenis.scrollTo(el, { offset: -72, duration: 1.2 });
   } else {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   }
+  // Move keyboard focus with the jump so the next Tab starts from the target.
+  if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
+  el.focus({ preventScroll: true });
 }

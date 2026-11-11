@@ -1,67 +1,92 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="robots" content="noindex" />
-    <title>404 — Obin Nguyen</title>
+    <title>Off the map · Obin Nguyen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <script>
+      try {
+        if (localStorage.getItem("obin-atlas-theme") === "light")
+          document.documentElement.setAttribute("data-theme", "light");
+      } catch (e) {}
+    </script>
     <style>
-      :root { color-scheme: dark; }
+      :root {
+        --paper: #141412;
+        --ink: #e4dfd4;
+        --muted: #969186;
+        --signal: #e46846;
+        --signal-ink: #ee8464;
+        color-scheme: dark;
+      }
+      :root[data-theme="light"] {
+        --paper: #efebe2;
+        --ink: #171613;
+        --muted: #605c53;
+        --signal: #de4e26;
+        --signal-ink: #b8320c;
+        color-scheme: light;
+      }
       * { margin: 0; box-sizing: border-box; }
       body {
         min-height: 100vh;
         display: grid;
         place-items: center;
-        background: #0a0a0b;
-        color: #f5f5f7;
+        padding: 24px;
+        background: var(--paper);
+        color: var(--ink);
         font-family: "Geist Mono", ui-monospace, monospace;
         text-align: center;
-        padding: 24px;
-        background-image:
-          radial-gradient(60% 80% at 80% 10%, rgba(43, 91, 255, 0.18), transparent 55%),
-          radial-gradient(55% 70% at 15% 100%, rgba(255, 61, 129, 0.14), transparent 60%);
       }
+      .label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+      .label b { color: var(--signal-ink); font-weight: 400; }
       .code {
-        font-family: "Clash Display", system-ui, sans-serif;
-        font-weight: 700;
-        font-size: clamp(5rem, 22vw, 12rem);
-        line-height: 0.9;
-        letter-spacing: -0.04em;
-        background: linear-gradient(100deg, #2b5bff, #ff3d81 45%, #f5a623);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        margin-top: 18px;
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: clamp(6rem, 26vw, 15rem);
+        line-height: 0.85;
+        letter-spacing: -0.03em;
       }
-      p { margin-top: 12px; color: #9c9eaa; font-size: 0.9rem; letter-spacing: 0.1em; }
+      .code em { color: var(--signal); }
+      p.note { margin-top: 18px; font-family: "Instrument Serif", Georgia, serif; font-size: 1.6rem; }
+      svg { display: block; margin: 0 auto 8px; }
       a {
         display: inline-block;
-        margin-top: 28px;
-        padding: 12px 22px;
+        margin-top: 30px;
+        padding: 13px 22px;
         border-radius: 9999px;
-        background: #f5a623;
-        color: #0a0a0b;
-        font-weight: 600;
+        background: var(--ink);
+        color: var(--paper);
         text-decoration: none;
         text-transform: uppercase;
-        letter-spacing: 0.12em;
-        font-size: 0.8rem;
+        letter-spacing: 0.14em;
+        font-size: 12px;
+        transition: background 0.3s;
       }
+      a:hover { background: var(--signal-ink); }
     </style>
   </head>
   <body>
     <main>
-      <div class="code">404</div>
-      <p>[ this page wandered off the map ]</p>
-      <a href="/">← Back to obinle.com</a>
+      <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-linecap="round">
+          <path d="M7 39 C5 22 21 8 38 10 S61 25 57 41 S37 59 22 56 S8 50 7 39Z" stroke-opacity="0.3" stroke-width="1.6" />
+          <path d="M15 37.5 C14 25 25 17 36 18.5 S52 28.5 48.5 39 S35.5 50 26 48 S15.5 45 15 37.5Z" stroke-opacity="0.55" stroke-width="1.6" />
+        </g>
+        <path d="M23 35.5 C23 29 28.5 26 34 27 S42 32 40.5 37 S33.5 43 29 42 S23 40.5 23 35.5Z" fill="none" stroke="var(--signal)" stroke-width="2" stroke-dasharray="3 3" />
+      </svg>
+      <span class="label"><b>Plate 404</b> / Uncharted</span>
+      <div class="code">4<em>0</em>4</div>
+      <p class="note">This page wandered off the map.</p>
+      <a href="/">Back to the atlas</a>
     </main>
   </body>
 </html>

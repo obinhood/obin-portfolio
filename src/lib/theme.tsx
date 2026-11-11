@@ -10,13 +10,18 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue>({ theme: "dark", toggle: () => {} });
 
-const STORAGE_KEY = "obin-theme";
+// Key for the Atlas redesign; night is the default edition.
+const STORAGE_KEY = "obin-atlas-theme";
 
 function getInitialTheme(): Theme {
   if (typeof window === "undefined") return "dark";
-  const saved = window.localStorage.getItem(STORAGE_KEY);
-  if (saved === "light" || saved === "dark") return saved;
-  return "dark"; // brand default
+  try {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    if (saved === "light" || saved === "dark") return saved;
+  } catch {
+    /* storage blocked: fall through to the default */
+  }
+  return "dark"; // brand default: night
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -24,7 +29,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    window.localStorage.setItem(STORAGE_KEY, theme);
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", theme === "dark" ? "#141412" : "#EFEBE2");
+    try {
+      window.localStorage.setItem(STORAGE_KEY, theme);
+    } catch {
+      /* ignore */
+    }
   }, [theme]);
 
   const toggle = useCallback(() => {

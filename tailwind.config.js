@@ -1,39 +1,34 @@
 /** @type {import('tailwindcss').Config} */
-// Design tokens are defined as CSS custom properties in src/index.css so that the
-// theme toggle (dark <-> light) can swap them at runtime. Tailwind colour utilities
-// below resolve to those variables and stay alpha-aware via <alpha-value>.
+// "Atlas" design tokens. Colours live as RGB triples in src/index.css so the
+// paper / night themes can swap them at runtime; utilities stay alpha-aware.
 export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   darkMode: ["class", '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
-        ink: "rgb(var(--bg) / <alpha-value>)",
-        "ink-soft": "rgb(var(--bg-soft) / <alpha-value>)",
-        surface: "rgb(var(--surface) / <alpha-value>)",
-        line: "rgb(var(--line) / <alpha-value>)",
-        ftext: "rgb(var(--text) / <alpha-value>)",
-        muted: "rgb(var(--text-muted) / <alpha-value>)",
-        cobalt: "rgb(var(--cobalt) / <alpha-value>)",
-        magenta: "rgb(var(--magenta) / <alpha-value>)",
-        gold: "rgb(var(--gold) / <alpha-value>)",
+        paper: "rgb(var(--paper) / <alpha-value>)",
+        "paper-2": "rgb(var(--paper-2) / <alpha-value>)",
+        card: "rgb(var(--card) / <alpha-value>)",
+        ink: "rgb(var(--ink) / <alpha-value>)",
+        "ink-2": "rgb(var(--ink-2) / <alpha-value>)",
+        rule: "rgb(var(--rule) / <alpha-value>)",
+        signal: "rgb(var(--signal) / <alpha-value>)",
+        "signal-ink": "rgb(var(--signal-ink) / <alpha-value>)",
+        water: "rgb(var(--water) / <alpha-value>)",
+        moss: "rgb(var(--moss) / <alpha-value>)",
       },
       fontFamily: {
-        display: ['"Clash Display"', "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ['"Instrument Serif"', "ui-serif", "Georgia", "serif"],
         sans: ['"Geist"', "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ['"Geist Mono"', "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {
-        // Fluid display scale
-        "display-sm": ["clamp(2.5rem, 6vw, 4rem)", { lineHeight: "0.95", letterSpacing: "-0.03em" }],
-        "display": ["clamp(3.5rem, 11vw, 9rem)", { lineHeight: "0.9", letterSpacing: "-0.04em" }],
-        "display-xl": ["clamp(4rem, 16vw, 14rem)", { lineHeight: "0.85", letterSpacing: "-0.045em" }],
+        plate: ["clamp(2.5rem, 5.4vw, 5.75rem)", { lineHeight: "0.95", letterSpacing: "-0.02em" }],
+        mega: ["clamp(4.5rem, 16vw, 19rem)", { lineHeight: "0.84", letterSpacing: "-0.03em" }],
       },
       maxWidth: {
-        container: "1240px",
-      },
-      borderRadius: {
-        xl2: "1.5rem",
+        container: "1480px",
       },
       transitionTimingFunction: {
         expo: "cubic-bezier(0.16, 1, 0.3, 1)",
@@ -44,18 +39,18 @@ export default {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
-        floaty: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-12px)" },
+        pulsering: {
+          "0%": { transform: "scale(1)", opacity: "0.55" },
+          "100%": { transform: "scale(2.6)", opacity: "0" },
         },
         "spin-slow": {
           to: { transform: "rotate(360deg)" },
         },
       },
       animation: {
-        marquee: "marquee var(--marquee-duration, 32s) linear infinite",
-        floaty: "floaty 6s ease-in-out infinite",
-        "spin-slow": "spin-slow 22s linear infinite",
+        marquee: "marquee var(--marquee-duration, 40s) linear infinite",
+        pulsering: "pulsering 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite",
+        "spin-slow": "spin-slow 40s linear infinite",
       },
     },
   },

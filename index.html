@@ -1,72 +1,71 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en-GB" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <!-- Apply the persisted theme before first paint to avoid a dark/light flash. -->
+    <meta name="theme-color" content="#141412" />
+    <!-- Apply the persisted theme before first paint to avoid a flash. Night is the default. -->
     <script>
       try {
-        var t = localStorage.getItem("obin-theme");
-        document.documentElement.setAttribute("data-theme", t === "light" || t === "dark" ? t : "dark");
+        var t = localStorage.getItem("obin-atlas-theme");
+        document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+        if (t === "light") {
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute("content", "#EFEBE2");
+        }
       } catch (e) {}
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#0A0A0B" />
 
-    <title>Obin Nguyen — Data Products, Mobility & AI</title>
+    <title>Obin Nguyen · Data, Product &amp; AI Strategy</title>
     <meta
       name="description"
-      content="Obin Nguyen: senior strategic consultant working across cities, mobility and AI. Data products, mobility intelligence and side projects that ship."
+      content="Obin Nguyen: data and product strategist in London. Nine years turning how cities move into data products and decisions, plus a stack of products built end to end."
     />
     <link rel="canonical" href="https://obinle.com/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://obinle.com/" />
-    <meta property="og:title" content="Obin Nguyen — Data Products, Mobility & AI" />
+    <meta property="og:title" content="Obin Nguyen · Data, Product & AI Strategy" />
     <meta
       property="og:description"
-      content="Senior strategic consultant at the intersection of cities, mobility, and AI."
+      content="I map how cities move, then build products from what the map shows."
     />
     <meta property="og:image" content="https://obinle.com/og-image.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Obin Nguyen — senior strategic consultant in cities, mobility and AI" />
+    <meta property="og:image:alt" content="Obin Nguyen, data and product strategist in London" />
     <meta property="og:site_name" content="Obin Nguyen" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Obin Nguyen — Data Products, Mobility & AI" />
+    <meta name="twitter:title" content="Obin Nguyen · Data, Product & AI Strategy" />
     <meta
       name="twitter:description"
-      content="Senior strategic consultant at the intersection of cities, mobility, and AI."
+      content="I map how cities move, then build products from what the map shows."
     />
     <meta name="twitter:image" content="https://obinle.com/og-image.png" />
 
-    <!-- Fonts: Clash Display (Fontshare) + Geist / Geist Mono (Google Fonts) -->
+    <!-- Fonts: Instrument Serif + Geist / Geist Mono (Google Fonts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link
-      href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700,500,400&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
-    <!-- JSON-LD Person schema for the CV -->
+    <!-- JSON-LD Person schema -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Le Nghia Nguyen",
         "alternateName": "Obin Nguyen",
-        "jobTitle": "Senior Strategic Consultant",
+        "jobTitle": "Data & Product Strategist",
         "email": "nguyenler@gmail.com",
         "url": "https://obinle.com",
         "address": { "@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB" },
@@ -76,9 +75,9 @@
         ],
         "knowsAbout": [
           "Data Products",
+          "Product Strategy",
           "Mobility Intelligence",
           "Spatial Data Science",
-          "Product Strategy",
           "Carbon Accounting",
           "Artificial Intelligence"
         ],
