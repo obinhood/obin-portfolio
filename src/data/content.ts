@@ -278,7 +278,7 @@ export const skills: SkillGroup[] = [
 /* ------------------------------ Beyond work ------------------------------- */
 
 export const running = {
-  latest: { race: "Barcelona Marathon", year: "2026", time: "4:46:37" },
+  latest: { race: "Barcelona Marathon", year: "2026", time: "4:31:00" },
   halfPB: "1:59:29",
   goal: "4:00:00",
   note: "A stubborn plan to break four hours, and more thought about pacing, fuelling and tapering than is reasonable.",
@@ -318,7 +318,7 @@ export const interests: Interest[] = [
   {
     tag: "Running",
     title: "Chasing a sub-4 marathon",
-    body: "Barcelona 2026 in 4:46:37, a half PB of 1:59:29, and a stubborn plan to break four hours. I think about pacing, fuelling and tapering more than is reasonable.",
+    body: "Barcelona 2026 in 4:31:00, a half PB of 1:59:29, and a stubborn plan to break four hours. I think about pacing, fuelling and tapering more than is reasonable.",
   },
   {
     tag: "Cinema",

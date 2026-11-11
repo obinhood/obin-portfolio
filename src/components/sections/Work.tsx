@@ -6,7 +6,7 @@ import FeaturedProject from "./FeaturedProject";
 import ProjectIndex from "./ProjectIndex";
 import ProjectModal from "./ProjectModal";
 
-const LAYOUTS = ["wide", "left", "right", "left"] as const;
+const LAYOUTS = ["wide", "left", "right"] as const;
 
 export default function Work() {
   const [openSlug, setOpenSlug] = useState<string | null>(null);

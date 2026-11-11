@@ -2,7 +2,8 @@
    projects.ts: every card is real, written from the repo's README, stack and
    maturity. Excluded on purpose: the STRV pipeline, empty or duplicate repos.
    `featured` projects get the large art-directed spreads; the rest sit in the
-   index. Copy rules: British English, no em dashes.
+   list below them. Screenshots are real product screens. Copy rules: British
+   English, no em dashes.
    ========================================================================== */
 
 export type ProjectLink = { label: string; href: string };
@@ -25,54 +26,75 @@ export type Project = {
   links: ProjectLink[];
 };
 
+const shots = (slug: string, n: number) =>
+  Array.from({ length: n }, (_, i) => `/projects/gallery/${slug}-${i + 1}.webp`);
+
 export const projects: Project[] = [
+  /* ------------------------------- featured ------------------------------- */
   {
     slug: "urban-lines",
     featured: true,
     name: "URBANLINES",
-    tagline: "Personalised marathon-route and city-map art prints.",
-    year: "2024–now",
+    tagline: "Personalised marathon route prints, drawn from verified course data.",
+    year: "2025–now",
     role: "Founder / full-stack & brand",
     category: "E-commerce · Cartography",
     accent: "signal",
-    image: "/projects/urban-lines.jpg",
-    gallery: [
-      "/projects/gallery/urban-lines-1.jpg",
-      "/projects/gallery/urban-lines-2.jpg",
-      "/projects/gallery/urban-lines-3.jpg",
-      "/projects/gallery/urban-lines-4.jpg",
-    ],
+    image: "/projects/urban-lines.webp",
+    gallery: shots("urban-lines", 5),
     problem:
-      "Runners and city-lovers want a premium, personal memento of a route or place, but generic map posters feel templated and the print quality rarely matches the moment.",
+      "Runners want a personal keepsake of a race they trained months for, with their own name, time and course on it, but generic map posters feel templated and the print quality rarely matches the moment.",
     approach:
-      "Built an end-to-end product: an OSM-driven map renderer with hand-tuned palettes and water-bleed fixes, a customisation and approval flow, Stripe checkout, and Prodigi fulfilment, wrapped in a Nordic, premium brand system.",
+      "Built the whole product as sole founder: a Python renderer that draws each course at 300 DPI, a live MapLibre preview that shares the print's palettes, personalisation with name, time and bib, Stripe checkout, an approval step before anything prints, and Prodigi fulfilment, all inside a minimal Nordic brand.",
     result:
-      "A live shop (urbanlines.co.uk) with a FastAPI + Next.js 14 stack on Supabase, Cloudflare R2 and Railway/Vercel, a full brand book, and a repeatable pipeline from order to delivered print.",
-    stack: ["Next.js 14", "FastAPI", "Supabase", "Cloudflare R2", "Stripe", "Prodigi", "OSM"],
+      "A live shop at urbanlines.co.uk with verified course data for more than 900 races in 73 countries, a Next.js 16 front end on Vercel, a FastAPI renderer on Railway, Supabase and Cloudflare R2 behind it, and a repeatable path from order to delivered print.",
+    stack: ["Next.js 16", "MapLibre GL", "FastAPI", "OSMnx + matplotlib", "Supabase", "Stripe", "Prodigi"],
     links: [{ label: "Visit shop", href: "https://urbanlines.co.uk" }],
   },
   {
-    slug: "sola",
+    slug: "sidequesty",
     featured: true,
-    name: "Sola",
-    tagline: "A women's safety running app with light-aware routing.",
-    year: "2025",
-    role: "Product & design lead",
-    category: "Mobile · Safety",
+    name: "sidequesty",
+    tagline: "Small real-world quests each day, with XP, streaks and a pixel pet.",
+    year: "2026–now",
+    role: "Founder / full-stack",
+    category: "Mobile · Game",
     accent: "water",
-    image: "/projects/sola.jpg",
+    image: "/projects/sidequesty.webp",
+    gallery: shots("sidequesty", 4),
     problem:
-      "Running alone, especially after dark, means constantly weighing routes against how safe and well-lit they feel, with no good tool to help.",
+      "Habit apps hand you a blank page: define the habits, set the targets, log the streaks yourself. They ask what you want to do at exactly the moment you have no answer, so the app becomes one more chore.",
     approach:
-      "Safety-weighted routing that blends UK Police crime data with OpenStreetMap street-lighting, plus live location sharing, check-in escalation, SOS and a fake call, in a calm 'Sola' visual language.",
+      "Turned it round so the app decides and you act. Each day it picks one featured quest for where you are, plus a short list shaped by your mood, goals and, if you allow it, the local weather. The server works out XP, levels, streaks, badges and pet gifts, and a pixel pet roams a retro 90s-desktop interface.",
     result:
-      "A working MVP pairing an Expo React Native app with a FastAPI backend and a 38-test suite, kept to a private design-partner pilot.",
-    stack: ["Expo / React Native", "FastAPI", "UK Police API", "OSM lighting", "Python"],
+      "Live in the browser on Railway, while the same Expo code is readied for App Store and Google Play review. One Node and Postgres backend runs friends, co-op quests, dares, visitor accounts and push reminders, tested by over 1,600 automated checks. Moderation and launch metrics are built for the store release but not yet live.",
+    stack: ["Expo / React Native", "TypeScript", "Node / Express", "PostgreSQL", "Railway", "Web push", "MET Norway weather API"],
     links: [],
   },
   {
-    slug: "carbonsense",
+    slug: "mamaloop",
     featured: true,
+    name: "MamaLoop",
+    tagline: "A map and community for London parents of babies and toddlers.",
+    year: "2026",
+    role: "Founder / full-stack",
+    category: "Web app · Community",
+    accent: "moss",
+    image: "/projects/mamaloop.webp",
+    gallery: shots("mamaloop", 4),
+    problem:
+      "Parents of under-fives in London plan every outing around naps, feeds and a buggy, yet maps rarely say whether there is a changing table or step-free entry, and local sessions are scattered across council PDFs, library pages and WhatsApp groups. A community for them also has to protect parents who cannot risk being found.",
+    approach:
+      "Built a TanStack Start and Supabase app in three parts: a map where parents can confirm amenities, a What's on calendar filtered to a child's age, and neighbourhood groups set by an area and radius, never a home address. Row-level security guards personal data, photos lose their location before upload, and posts containing a postcode or phone number are flagged for a moderator.",
+    result:
+      "Deployed on Railway with nearly 3,000 sessions gathered from council, library and provider listings, a moderator console, data download and account deletion, automated WCAG 2.2 AA checks in the Playwright tests and a draft data protection impact assessment. It has not launched, so the community features are built but have no members yet.",
+    stack: ["TanStack Start", "React 19", "Supabase (Postgres, PostGIS, RLS)", "Leaflet + OpenStreetMap", "Tailwind CSS", "Playwright", "Railway"],
+    links: [],
+  },
+
+  /* --------------------------------- list --------------------------------- */
+  {
+    slug: "carbonsense",
     name: "CarbonSense",
     tagline: "An honest, multi-model personal carbon footprint platform for the UK and EU.",
     year: "2026",
@@ -97,7 +119,6 @@ export const projects: Project[] = [
   },
   {
     slug: "adloop",
-    featured: true,
     name: "AdLoop",
     tagline: "Turn a product URL into paid-social ads that learn from your own performance.",
     year: "2026",
@@ -118,6 +139,62 @@ export const projects: Project[] = [
     result:
       "An MVP with credit metering, Stripe billing, an async render pipeline and around 80 passing tests, running end to end in a zero-infra mock mode with real adapters wired behind interfaces.",
     stack: ["Python", "FastAPI", "Next.js", "Anthropic API", "HeyGen", "Stripe", "Supabase"],
+    links: [],
+  },
+  {
+    slug: "openplay",
+    name: "OpenPlay",
+    tagline: "Live court availability across Prague's sports venues, in one timetable.",
+    year: "2026",
+    role: "Founder / full-stack",
+    category: "Web app · Sports discovery",
+    accent: "water",
+    image: "/projects/openplay.webp",
+    gallery: shots("openplay", 4),
+    problem:
+      "Finding a free padel, tennis or squash court in Prague means checking club after club. The venues use many different booking systems, and some hide their timetables behind a login or take public bookings only by phone.",
+    approach:
+      "A scheduled collector refreshes the next 14 days for each sport every five minutes, reading only public timetables and saving snapshots to Cloudflare D1, so pages never wait on a venue's system. A Czech and English Next.js app turns them into a quick finder, a seven-day timetable and a mapped venue directory, then hands every booking to the venue.",
+    result:
+      "A live public prototype covering padel, tennis, squash and volleyball. A health check flags any sport feed older than 15 minutes, the page warns players when data may be out of date, and an analytics view estimates court occupancy and booking patterns from changes in public availability, without collecting customer data.",
+    stack: ["Next.js 16 (vinext)", "Cloudflare Workers", "Cloudflare D1 + Drizzle", "Leaflet / OpenStreetMap", "Node.js collector", "Railway cron"],
+    links: [{ label: "Live site", href: "https://openplay-production-acce.up.railway.app" }],
+  },
+  {
+    slug: "orbital",
+    name: "Orbital",
+    tagline: "Interplanetary mission planning on a 3D map of the solar system.",
+    year: "2026",
+    role: "Designer & builder",
+    category: "Web app · Astrodynamics",
+    accent: "moss",
+    image: "/projects/orbital.webp",
+    gallery: shots("orbital", 4),
+    problem:
+      "Space travel is often explained as distance divided by speed. Real missions depend on moving planets, launch windows, rocket performance and gravity assists, and the maths for that lives in specialist tools that curious people rarely get to touch.",
+    approach:
+      "Built a three.js map of the solar system and a planner on a patched-conic model: a Lambert solver after Izzo (2015), powered flybys as in ESA's GTOP benchmarks, JPL Horizons positions through a small validating proxy, and sourced launcher and spacecraft data. Searches run in a web worker, and an Explain toggle notes what each parameter means.",
+    result:
+      "A working two-page prototype: a planner that finds the next launch window, picks the best-suited spacecraft and launcher, and replays flown probes such as Cassini and Voyager 2, plus an archive of 77 missions, 44 plotted from JPL's reconstructed trajectories. Replays of Cassini, New Horizons and Voyager 1 come within 2% of the launch energy each flew.",
+    stack: ["three.js (WebGL)", "JavaScript (ES modules)", "Vite", "JPL Horizons API", "Web Workers", "Canvas 2D", "node:test"],
+    links: [],
+  },
+  {
+    slug: "sola",
+    name: "Sola",
+    tagline: "A women's safety running app with light-aware routing.",
+    year: "2025",
+    role: "Product & design lead",
+    category: "Mobile · Safety",
+    accent: "signal",
+    image: "/projects/sola.jpg",
+    problem:
+      "Running alone, especially after dark, means constantly weighing routes against how safe and well-lit they feel, with no good tool to help.",
+    approach:
+      "Safety-weighted routing that blends UK Police crime data with OpenStreetMap street-lighting, plus live location sharing, check-in escalation, SOS and a fake call, in a calm 'Sola' visual language.",
+    result:
+      "A working MVP pairing an Expo React Native app with a FastAPI backend and a 38-test suite, kept to a private design-partner pilot.",
+    stack: ["Expo / React Native", "FastAPI", "UK Police API", "OSM lighting", "Python"],
     links: [],
   },
   {
@@ -193,60 +270,6 @@ export const projects: Project[] = [
     links: [],
   },
   {
-    slug: "prague-real-estate",
-    name: "Prague Property Intelligence",
-    tagline: "A daily market tracker for Prague real estate.",
-    year: "2024",
-    role: "Builder",
-    category: "Data product · Geospatial",
-    accent: "water",
-    image: "/projects/prague.jpg",
-    problem:
-      "Prague's property market moves daily, but listings sites show snapshots, not change: re-listings, price drops and time-on-market are invisible.",
-    approach:
-      "Scrapes Sreality (and optionally Bezrealitky), tracks day-over-day price and availability changes in PostgreSQL, and derives analyst fields (price tier, Prague ring, amenity score, days-on-market) with full re-listing detection.",
-    result:
-      "A polished FastAPI + React dashboard with a 5-step location-resolution chain and genuine market trend insight.",
-    stack: ["FastAPI", "React", "PostgreSQL", "Web scraping", "Geospatial"],
-    links: [],
-  },
-  {
-    slug: "prague-hall-booking",
-    name: "Prague Hall Booking",
-    tagline: "One place to book rehearsal space across Prague's fragmented venues.",
-    year: "2026",
-    role: "Builder",
-    category: "Full-stack · Booking platform",
-    accent: "moss",
-    image: "/projects/prague-hall-booking.jpg",
-    problem:
-      "Prague's rehearsal and hall space is scattered across many independent venues, each on its own booking island of portals, calendars or just phone and email, so renters have to check every venue separately.",
-    approach:
-      "A Postgres and PostGIS model makes double-bookings structurally impossible via a single exclusion constraint, a NestJS API handles attribute, geo and time-window search, a Next.js app drives booking, and a connector layer reconciles each venue's availability from iCal feeds and booking SaaS without touching the core.",
-    result:
-      "A verified Phase 1 slice: the anti-double-booking race passes, real venue iCal feeds import genuine busy periods, and request-mode booking, a provider dashboard and a self-serve onboarding wizard all work.",
-    stack: ["Next.js 15", "NestJS", "PostgreSQL", "PostGIS", "iCal / RRULE", "Docker"],
-    links: [],
-  },
-  {
-    slug: "side-quest",
-    name: "Side Quest",
-    tagline: "A gamified daily-adventures app with a pixel pet.",
-    year: "2025",
-    role: "Designer & builder",
-    category: "Mobile · Game",
-    accent: "signal",
-    image: "/projects/sidequest.jpg",
-    problem:
-      "Habit and to-do apps feel like admin: streaks and checklists that nag rather than delight.",
-    approach:
-      "Reframed daily tasks as a tiny RPG: choose a pixel 'tamagotchi' that wanders your home screen, earn XP and level up, and collect artefacts, all in a playful Y2K / vaporwave interface.",
-    result:
-      "A multi-platform MVP: a React and Vite web app plus an Expo React Native twin sharing one Node and Express backend, covering onboarding, pet selection, XP and levelling, and quests.",
-    stack: ["React", "Vite", "Node / Express", "PostgreSQL", "Expo", "Gamification"],
-    links: [],
-  },
-  {
     slug: "equity-desk",
     name: "EquityDesk",
     tagline: "A research and technical-signal workspace for equities that never places a trade.",
@@ -271,13 +294,31 @@ export const projects: Project[] = [
     links: [],
   },
   {
+    slug: "prague-real-estate",
+    name: "Prague Property Intelligence",
+    tagline: "A daily market tracker for Prague real estate.",
+    year: "2024",
+    role: "Builder",
+    category: "Data product · Geospatial",
+    accent: "moss",
+    image: "/projects/prague.jpg",
+    problem:
+      "Prague's property market moves daily, but listings sites show snapshots, not change: re-listings, price drops and time-on-market are invisible.",
+    approach:
+      "Scrapes Sreality (and optionally Bezrealitky), tracks day-over-day price and availability changes in PostgreSQL, and derives analyst fields (price tier, Prague ring, amenity score, days-on-market) with full re-listing detection.",
+    result:
+      "A polished FastAPI + React dashboard with a 5-step location-resolution chain and genuine market trend insight.",
+    stack: ["FastAPI", "React", "PostgreSQL", "Web scraping", "Geospatial"],
+    links: [],
+  },
+  {
     slug: "lca-calculator",
     name: "Carbon Footprint MVP",
     tagline: "Organisational carbon accounting across Scopes 1 to 3.",
     year: "2024",
     role: "Builder",
     category: "Climate · ESG",
-    accent: "moss",
+    accent: "signal",
     image: "/projects/carbon.jpg",
     problem:
       "SMEs need credible Scope 1-3 carbon accounting but enterprise tools are heavy and opaque about emission factors.",
@@ -295,7 +336,7 @@ export const projects: Project[] = [
     year: "2018",
     role: "Researcher (UCL)",
     category: "Research · R",
-    accent: "signal",
+    accent: "water",
     image: "/projects/geodem.jpg",
     problem:
       "Mental-health outcomes vary sharply across a city, but the geodemographic drivers are easy to assert and hard to evidence.",

@@ -9,7 +9,8 @@ type Props = {
 };
 
 /**
- * The full index as an editorial table of contents. On fine pointers a framed
+ * Everything beyond the featured spreads, as a plain editorial list: name,
+ * category and year, no images in the rows. On fine pointers a small framed
  * preview follows the cursor (not for reduced motion).
  */
 export default function ProjectIndex({ items, onOpen }: Props) {
@@ -62,14 +63,6 @@ export default function ProjectIndex({ items, onOpen }: Props) {
               >
                 →
               </span>
-              {project.image && (
-                <img
-                  src={project.image}
-                  alt=""
-                  loading="lazy"
-                  className="print-tone col-span-3 mt-4 aspect-[16/9] w-full object-cover object-top md:hidden"
-                />
-              )}
             </button>
           </li>
         ))}
