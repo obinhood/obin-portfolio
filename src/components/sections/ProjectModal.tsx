@@ -241,7 +241,10 @@ export default function ProjectModal({ project, number, total, next, prev, onNav
           <div className="mt-24">
             <span className="label">Plates · screens from the build</span>
             <div className="mt-5 grid gap-4 sm:grid-cols-2 sm:gap-6">
-              {project.gallery.map((src, i) => (
+              {project.gallery.map((src, i) => {
+                // With an odd count the first plate spans both columns, so it gets a wide frame.
+                const wide = i === 0 && project.gallery!.length % 2 === 1;
+                return (
                 <button
                   key={src}
                   type="button"
@@ -251,19 +254,20 @@ export default function ProjectModal({ project, number, total, next, prev, onNav
                   }}
                   aria-label={`Enlarge screenshot ${i + 1} of ${project.name}`}
                   data-cursor="zoom"
-                  className={`mount group block p-2 text-left ${i === 0 && project.gallery!.length % 2 === 1 ? "sm:col-span-2" : ""}`}
+                  className={`mount group block p-2 text-left ${wide ? "sm:col-span-2" : ""}`}
                 >
                   <div className="overflow-hidden bg-paper-2">
                     <img
                       src={src}
                       alt={`${project.name} screenshot ${i + 1}`}
                       loading="lazy"
-                      className="aspect-[4/3] w-full object-cover object-top transition-transform duration-[1.2s] ease-expo group-hover:scale-[1.04]"
+                      className={`${wide ? "aspect-[4/3] sm:aspect-[16/9]" : "aspect-[4/3]"} w-full object-cover object-top transition-transform duration-[1.2s] ease-expo group-hover:scale-[1.04]`}
                     />
                   </div>
                   <span className="label mt-2 block px-0.5">Fig. {number}.{i + 1}</span>
                 </button>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

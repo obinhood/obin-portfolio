@@ -108,16 +108,14 @@ function Meta({ project, number, onOpen }: { project: Project; number: string; o
   );
 }
 
+// Frame each print to its screenshot: desktop captures are 16:10, phone composites 4:3 (the default).
 const ASPECT: Record<string, string> = {
-  sola: "aspect-[7/5]",
-  adloop: "aspect-[8/5]",
-  carbonsense: "aspect-[4/5]",
+  mamaloop: "aspect-[8/5]",
 };
 
 export default function FeaturedProject({ project, number, layout, onOpen }: Props) {
   const img = project.image ?? "";
   const caption = `${project.name}, ${project.category}`;
-  const isPortrait = project.slug === "carbonsense";
 
   return (
     <article className="group relative">
@@ -139,7 +137,7 @@ export default function FeaturedProject({ project, number, layout, onOpen }: Pro
 
         {layout === "left" && (
           <div className="grid items-center gap-8 md:grid-cols-12 md:gap-10">
-            <div className={isPortrait ? "md:col-span-5" : "md:col-span-7"}>
+            <div className="md:col-span-7">
               <Print
                 src={img}
                 alt={`${project.name} cover`}
@@ -148,7 +146,7 @@ export default function FeaturedProject({ project, number, layout, onOpen }: Pro
                 caption={caption}
               />
             </div>
-            <div className={isPortrait ? "md:col-span-6 md:col-start-7" : "md:col-span-5"}>
+            <div className="md:col-span-5">
               <Meta project={project} number={number} onOpen={onOpen} />
             </div>
           </div>
@@ -156,10 +154,10 @@ export default function FeaturedProject({ project, number, layout, onOpen }: Pro
 
         {layout === "right" && (
           <div className="grid items-center gap-8 md:grid-cols-12 md:gap-10">
-            <div className={`order-2 md:order-1 ${isPortrait ? "md:col-span-6" : "md:col-span-5"}`}>
+            <div className="order-2 md:order-1 md:col-span-5">
               <Meta project={project} number={number} onOpen={onOpen} />
             </div>
-            <div className={`order-1 md:order-2 ${isPortrait ? "md:col-span-5 md:col-start-8" : "md:col-span-7"}`}>
+            <div className="order-1 md:order-2 md:col-span-7">
               <Print
                 src={img}
                 alt={`${project.name} cover`}
